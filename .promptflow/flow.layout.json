@@ -1,0 +1,45 @@
+{
+  "nodeLayouts": {
+    "inputs": {
+      "x": 465,
+      "y": 42,
+      "index": -1
+    },
+    "outputs": {
+      "x": 560,
+      "y": 846,
+      "index": -1
+    },
+    "setup_env": {
+      "x": 227.5,
+      "y": 176,
+      "index": 0
+    },
+    "download_tool": {
+      "x": 480,
+      "y": 310,
+      "index": 1
+    },
+    "build_index_tool": {
+      "x": 480,
+      "y": 444,
+      "index": 2
+    },
+    "find_context_tool": {
+      "x": 305,
+      "y": 578,
+      "index": 3
+    },
+    "qna_tool": {
+      "x": 392.5,
+      "y": 712,
+      "index": 4
+    },
+    "rewrite_question_tool": {
+      "x": 140,
+      "y": 310,
+      "index": 5
+    }
+  },
+  "orientation": "Vertical"
+}

@@ -1,0 +1,588 @@
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     Start executing nodes in thread pool mode.
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     Start to run 6 nodes with concurrency level 16.
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     Executing node setup_env. node run id: ff229e82-2527-4c4f-997b-9f130e469172_setup_env_0
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     Node setup_env completes.
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     Executing node download_tool. node run id: ff229e82-2527-4c4f-997b-9f130e469172_download_tool_0
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     Executing node rewrite_question_tool. node run id: ff229e82-2527-4c4f-997b-9f130e469172_rewrite_question_tool_0
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     [download_tool in line 0 (index starts from 0)] stdout> Pdf already exists in /home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/.pdfs/http___127.0.0.1_5000_get_pdf.pdf
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     Node download_tool completes.
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     Executing node build_index_tool. node run id: ff229e82-2527-4c4f-997b-9f130e469172_build_index_tool_0
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     [build_index_tool in line 0 (index starts from 0)] stdout> Chunk size: 1024, chunk overlap: 64
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     [build_index_tool in line 0 (index starts from 0)] stdout> Index path: /home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/.index/.pdfs/http___127.0.0.1_5000_get_pdf.pdf.index_1024_64
+2024-02-12 22:21:41 +0300   66688 execution.flow     INFO     [build_index_tool in line 0 (index starts from 0)] stdout> Building index
+2024-02-12 22:22:22 +0300   66688 execution.flow     INFO     [build_index_tool in line 0 (index starts from 0)] stdout> Number of segments: 1727
+2024-02-12 22:22:22 +0300   66688 execution          ERROR    Node build_index_tool in line 0 failed. Exception: Execution failure in 'build_index_tool': (ValidationError) 1 validation error for JinaEmbeddings
+__root__
+  Did not find jina_api_key, please add an environment variable `JINA_API_KEY` which contains it, or pass `jina_api_key` as a named parameter. (type=value_error).
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 190, in _invoke_tool_with_timer
+    return f(**kwargs)
+           ^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/tracer.py", line 404, in wrapped
+    output = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/build_index_tool.py", line 7, in build_index_tool
+    return create_faiss_index(pdf_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/build_index.py", line 46, in create_faiss_index
+    index.insert_batch(segments)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/index.py", line 38, in insert_batch
+    vector = self.embedding.generate(text)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/retry.py", line 21, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/oai.py", line 135, in generate
+    embed_model = JinaEmbeddings(
+                  ^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for JinaEmbeddings
+__root__
+  Did not find jina_api_key, please add an environment variable `JINA_API_KEY` which contains it, or pass `jina_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 88, in invoke_tool
+    result = self._invoke_tool_with_timer(node, f, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 201, in _invoke_tool_with_timer
+    raise ToolExecutionError(node_name=node_name, module=module) from e
+promptflow._core._errors.ToolExecutionError: Execution failure in 'build_index_tool': (ValidationError) 1 validation error for JinaEmbeddings
+__root__
+  Did not find jina_api_key, please add an environment variable `JINA_API_KEY` which contains it, or pass `jina_api_key` as a named parameter. (type=value_error)
+2024-02-12 22:22:22 +0300   66688 execution.flow     ERROR    Flow execution has failed. Cancelling all running nodes: rewrite_question_tool,build_index_tool.
+2024-02-12 22:22:41 +0300   66688 execution          WARNING  rewrite_question_tool in line 0 has been running for 60 seconds, stacktrace of thread 140428182210240:
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/rewrite_question_tool.py", line 7, in rewrite_question_tool
+    return rewrite_question(question, history)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/rewrite_question.py", line 26, in rewrite_question
+    rewritten_question = chat.generate(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/retry.py", line 21, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/oai.py", line 84, in generate
+    message = self.client.chat.completions.create(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/openai_injector.py", line 88, in wrapper
+    return f(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/tracer.py", line 404, in wrapped
+    output = func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 663, in create
+    return self._post(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1200, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 889, in request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 918, in _request
+    response = self._client.send(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 915, in send
+    response = self._send_handling_auth(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 943, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 980, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1016, in _send_single_request
+    response = transport.handle_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 231, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 251, in handle_request
+    response = connection.handle_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 76, in handle_request
+    stream = self._connect(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 206, in connect_tcp
+    sock = socket.create_connection(
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+
+2024-02-12 22:22:47 +0300   66688 execution.flow     INFO     [rewrite_question_tool in line 0 (index starts from 0)] stdout> Func execution failed. Retrying in 5 seconds: Connection error.
+2024-02-12 22:23:41 +0300   66688 execution          WARNING  rewrite_question_tool in line 0 has been running for 120 seconds, stacktrace of thread 140428182210240:
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/rewrite_question_tool.py", line 7, in rewrite_question_tool
+    return rewrite_question(question, history)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/rewrite_question.py", line 26, in rewrite_question
+    rewritten_question = chat.generate(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/retry.py", line 21, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/oai.py", line 84, in generate
+    message = self.client.chat.completions.create(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/openai_injector.py", line 88, in wrapper
+    return f(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/tracer.py", line 404, in wrapped
+    output = func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 663, in create
+    return self._post(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1200, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 889, in request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 918, in _request
+    response = self._client.send(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 915, in send
+    response = self._send_handling_auth(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 943, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 980, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1016, in _send_single_request
+    response = transport.handle_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 231, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 251, in handle_request
+    response = connection.handle_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 76, in handle_request
+    stream = self._connect(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 206, in connect_tcp
+    sock = socket.create_connection(
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+
+2024-02-12 22:23:50 +0300   66688 execution.flow     INFO     [rewrite_question_tool in line 0 (index starts from 0)] stdout> Func execution failed. Retrying in 5 seconds: Connection error.
+2024-02-12 22:24:41 +0300   66688 execution          WARNING  rewrite_question_tool in line 0 has been running for 180 seconds, stacktrace of thread 140428182210240:
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/rewrite_question_tool.py", line 7, in rewrite_question_tool
+    return rewrite_question(question, history)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/rewrite_question.py", line 26, in rewrite_question
+    rewritten_question = chat.generate(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/retry.py", line 21, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/oai.py", line 84, in generate
+    message = self.client.chat.completions.create(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/openai_injector.py", line 88, in wrapper
+    return f(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/tracer.py", line 404, in wrapped
+    output = func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 663, in create
+    return self._post(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1200, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 889, in request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 918, in _request
+    response = self._client.send(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 915, in send
+    response = self._send_handling_auth(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 943, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 980, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1016, in _send_single_request
+    response = transport.handle_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 231, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 251, in handle_request
+    response = connection.handle_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 76, in handle_request
+    stream = self._connect(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 206, in connect_tcp
+    sock = socket.create_connection(
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+
+2024-02-12 22:24:58 +0300   66688 execution.flow     INFO     [rewrite_question_tool in line 0 (index starts from 0)] stdout> Func execution failed. Retrying in 5 seconds: Connection error.
+2024-02-12 22:25:41 +0300   66688 execution          WARNING  rewrite_question_tool in line 0 has been running for 240 seconds, stacktrace of thread 140428182210240:
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/rewrite_question_tool.py", line 7, in rewrite_question_tool
+    return rewrite_question(question, history)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/rewrite_question.py", line 26, in rewrite_question
+    rewritten_question = chat.generate(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/retry.py", line 21, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/oai.py", line 84, in generate
+    message = self.client.chat.completions.create(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/openai_injector.py", line 88, in wrapper
+    return f(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/tracer.py", line 404, in wrapped
+    output = func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 663, in create
+    return self._post(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1200, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 889, in request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 918, in _request
+    response = self._client.send(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 915, in send
+    response = self._send_handling_auth(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 943, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 980, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1016, in _send_single_request
+    response = transport.handle_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 231, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 251, in handle_request
+    response = connection.handle_request(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 76, in handle_request
+    stream = self._connect(request)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 206, in connect_tcp
+    sock = socket.create_connection(
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+
+2024-02-12 22:25:55 +0300   66688 execution.flow     INFO     [rewrite_question_tool in line 0 (index starts from 0)] stdout> Func execution failed. Retrying in 5 seconds: Connection error.
+2024-02-12 22:26:41 +0300   66688 execution          WARNING  rewrite_question_tool in line 0 has been running for 300 seconds, stacktrace of thread 140428182210240:
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/rewrite_question_tool.py", line 7, in rewrite_question_tool
+    return rewrite_question(question, history)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/rewrite_question.py", line 26, in rewrite_question
+    rewritten_question = chat.generate(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/retry.py", line 21, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/oai.py", line 84, in generate
+    message = self.client.chat.completions.create(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/openai_injector.py", line 88, in wrapper
+    return f(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/tracer.py", line 404, in wrapped
+    output = func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 663, in create
+    return self._post(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1200, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 889, in request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1011, in _retry_request
+    time.sleep(timeout)
+
+2024-02-12 22:26:58 +0300   66688 execution          ERROR    Node rewrite_question_tool in line 0 failed. Exception: Execution failure in 'rewrite_question_tool': (Exception) Func execution failed after 5 retries: Connection error..
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 10, in map_exceptions
+    yield
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 206, in connect_tcp
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 67, in map_httpcore_exceptions
+    yield
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 231, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 268, in handle_request
+    raise exc
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 251, in handle_request
+    response = connection.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 99, in handle_request
+    raise exc
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 76, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 205, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 918, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 915, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 943, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 980, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1016, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 230, in handle_request
+    with map_httpcore_exceptions():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 84, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 10, in map_exceptions
+    yield
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 206, in connect_tcp
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 67, in map_httpcore_exceptions
+    yield
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 231, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 268, in handle_request
+    raise exc
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 251, in handle_request
+    response = connection.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 99, in handle_request
+    raise exc
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 76, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 205, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 918, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 915, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 943, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 980, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1016, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 230, in handle_request
+    with map_httpcore_exceptions():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 84, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 10, in map_exceptions
+    yield
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 206, in connect_tcp
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 67, in map_httpcore_exceptions
+    yield
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 231, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 268, in handle_request
+    raise exc
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 251, in handle_request
+    response = connection.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 99, in handle_request
+    raise exc
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 76, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 205, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 918, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 915, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 943, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 980, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1016, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 230, in handle_request
+    with map_httpcore_exceptions():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 84, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/retry.py", line 21, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/oai.py", line 84, in generate
+    message = self.client.chat.completions.create(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/openai_injector.py", line 88, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/tracer.py", line 404, in wrapped
+    output = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 663, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1200, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 889, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 942, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/openai/_base_client.py", line 952, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 190, in _invoke_tool_with_timer
+    return f(**kwargs)
+           ^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/tracer.py", line 404, in wrapped
+    output = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/rewrite_question_tool.py", line 7, in rewrite_question_tool
+    return rewrite_question(question, history)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/rewrite_question.py", line 26, in rewrite_question
+    rewritten_question = chat.generate(
+                         ^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/utils/retry.py", line 24, in wrapper
+    raise Exception(
+Exception: Func execution failed after 5 retries: Connection error.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 88, in invoke_tool
+    result = self._invoke_tool_with_timer(node, f, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 201, in _invoke_tool_with_timer
+    raise ToolExecutionError(node_name=node_name, module=module) from e
+promptflow._core._errors.ToolExecutionError: Execution failure in 'rewrite_question_tool': (Exception) Func execution failed after 5 retries: Connection error.
