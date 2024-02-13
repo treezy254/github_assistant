@@ -1,4 +1,4 @@
-# Chat with PDF
+# Chat with Github Repo
 
 This is a simple flow that allow you to ask questions about the content of a PDF file and get answers.
 You can run the flow with a URL to a PDF file and question as argument.
