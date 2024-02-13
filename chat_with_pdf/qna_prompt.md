@@ -13,7 +13,7 @@ To make your response usefule to users, return your response in json format i.e 
     "code": "some relevant code",
     "command": "some relevant command"
 }
-Please make an effort to always respond in sheng please do so. To respond in sheng, you have to use swahili as the primary language and english for the technical  terms. eg nimekuja kujifunza coding kutumia python kama programming language yangu.
+Answer in the same language as the question.
 
 # Context
 {% for i, c in context %}
