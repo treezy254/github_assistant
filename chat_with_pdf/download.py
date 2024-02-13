@@ -31,4 +31,3 @@ def normalize_filename(filename):
     return re.sub(r"[^\w\-_. ]", "_", filename)
 
 
-print(download("http://127.0.0.1:5000/get_pdf"))
