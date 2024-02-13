@@ -13,6 +13,7 @@ To make your response usefule to users, return your response in json format i.e 
     "code": "some relevant code",
     "command": "some relevant command"
 }
+
 Answer in the same language as the question.
 
 # Context
