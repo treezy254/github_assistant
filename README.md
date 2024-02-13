@@ -2,7 +2,7 @@
 
 This is a simple flow that allow you to ask questions about the content of a github repository and get answers.
 You can run the flow with a URL to a PDF file and question as argument.
-Once it's launched it will download the PDF and build an index of the content. 
+Once it's launched it will download the repo content and build an index of the content. 
 Then when you ask a question, it will look up the index to retrieve relevant content and post the question with the relevant content to OpenAI chat model (gpt-3.5-turbo or gpt4) to get an answer.
 
 Learn more on corresponding [tutorials](../../../tutorials/e2e-development/chat-with-pdf.md).
