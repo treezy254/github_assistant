@@ -1,3 +1,14 @@
 {
-  "nodes": {}
+  "nodes": {
+    "issues": {
+      "variant_0": {
+        "inputs": {
+          "chat_history": [],
+          "question": [],
+          "response_format": [],
+          "issue": []
+        }
+      }
+    }
+  }
 }

@@ -103,6 +103,29 @@
       },
       "source": "rewrite_question_tool.py",
       "function": "rewrite_question_tool"
+    },
+    "issues.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "issue": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "issues.jinja2"
+    },
+    "get_issues.py": {
+      "type": "python",
+      "inputs": {
+        "input1": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "get_issues.py",
+      "function": "my_python_tool"
     }
   }
 }
