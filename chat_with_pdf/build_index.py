@@ -45,7 +45,7 @@ def create_faiss_index(pdf_path: str) -> str:
 
         log(f"Number of segments: {len(segments)}")
 
-        index = FAISSIndex(index=faiss.IndexFlatL2(768), embedding=OAIEmbedding())
+        index = FAISSIndex(index=faiss.IndexFlatL2(1536), embedding=OAIEmbedding())
         index.insert_batch(segments)
 
         index.save(index_persistent_path)
@@ -71,4 +71,3 @@ def split_text(text, chunk_size, chunk_overlap):
 
     return chunks
 
-create_faiss_index("/home/arch/Desktop/promptflow-main/examples/flows/chat/chat-with-pdf/chat_with_pdf/.pdfs/http___127.0.0.1_5000_get_pdf.pdf")
