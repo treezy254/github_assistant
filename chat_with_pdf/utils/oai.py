@@ -114,8 +114,6 @@ class OAIChat(OAI):
             else:
                 yield ""
 
-from transformers import AutoModel
-from langchain_community.embeddings import JinaEmbeddings
 
 class OAIEmbedding(OAI):
     @retry_and_handle_exceptions(
@@ -123,24 +121,11 @@ class OAIEmbedding(OAI):
         max_retries=5,
         extract_delay_from_error_message=extract_delay_from_rate_limit_error_msg,
     )
-    # def generate(self, text: str) -> List[float]:
-    #     return self.client.embeddings.create(
-    #         input=text, model=os.environ.get("EMBEDDING_MODEL_DEPLOYMENT_NAME")
-    #     ).data[0].embedding
-
-    # Using Jina-ai embeddings
     def generate(self, text: str) -> List[float]:
-        # jinaai_api_key = ""
-        # os.environ["JINAAI_API_KEY"] = jinaai_api_key
-        # embed_model = JinaEmbeddings(
-        #     jina_api_key=jinaai_api_key,
-        #     model="jina-embeddings-v2-base-en",
-        # )
-        # embeddings = embed_model.get_text_embedding(text)
-
-        embeddings = JinaEmbeddings(jina_api_key="jina_04dba0fe9efb47039591acbb56c29a22vuiQrnazTfncbZmwp3NbgTyiu4aV", model_name="jina-embeddings-v2-base-en")
-        query_result = embeddings.embed_query(text)
-        return query_result
+        return self.client.embeddings.create(
+            input=text, model=os.environ.get("EMBEDDING_MODEL_DEPLOYMENT_NAME")
+        ).data[0].embedding 
+    
 
 
 def count_token(text: str) -> int:
