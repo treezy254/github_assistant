@@ -70,3 +70,5 @@ pfazure run create --file batch_run.yaml --name $run_name --runtime example-runt
 ```
 
 Note: Click portal_url of the run to view the final snapshot.
+
+Link to Dataset Preparation: COMING SOON!
